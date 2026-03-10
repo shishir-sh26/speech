@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master the Stage — Presentation & Communication Mastery</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --gold: #c8952a;
+    --gold-light: #f0c96b;
+    --rust: #b84c27;
+    --sage: #3d5a4a;
+    --cream: #faf7f2;
+    --shadow: rgba(13,13,13,0.12);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px;
+    position: relative;
+    background: var(--ink);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, #1a1208 0%, #0d0d0d 100%);
+  }
+
+  .hero-lines {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      0deg, transparent, transparent 59px, rgba(200,149,42,0.06) 59px, rgba(200,149,42,0.06) 60px
+    ), repeating-linear-gradient(
+      90deg, transparent, transparent 59px, rgba(200,149,42,0.06) 59px, rgba(200,149,42,0.06) 60px
+    );
+  }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    position: relative;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 9vw, 7.5rem);
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 0.95;
+    position: relative;
+    animation: fadeUp 0.9s 0.1s ease both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-weight: 300;
+    color: rgba(245,240,232,0.65);
+    margin-top: 24px;
+    max-width: 520px;
+    line-height: 1.7;
+    position: relative;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero-cta {
+    margin-top: 48px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+
+  .btn {
+    padding: 14px 32px;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--ink);
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid rgba(245,240,232,0.3);
+    color: var(--paper);
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* NAV */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    border-bottom: 1px solid rgba(200,149,42,0.2);
+    padding: 0 32px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    padding: 16px 20px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: rgba(245,240,232,0.5);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { color: var(--paper); }
+  .nav-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* SECTIONS */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* PILLARS */
+  .pillars {
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .section-intro {
+    font-size: 17px;
+    font-weight: 300;
+    color: #444;
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 56px;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .pillar-card {
+    background: var(--cream);
+    border: 1px solid rgba(13,13,13,0.08);
+    border-radius: 4px;
+    padding: 36px 32px;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pillar-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transition: transform 0.25s;
+    transform-origin: bottom;
+  }
+
+  .pillar-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px var(--shadow); }
+  .pillar-card:hover::before { transform: scaleY(1); }
+
+  .pillar-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .pillar-title {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .pillar-desc {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: #555;
+  }
+
+  .pillar-expand {
+    margin-top: 20px;
+    display: none;
+    border-top: 1px solid rgba(13,13,13,0.08);
+    padding-top: 20px;
+  }
+
+  .pillar-card.open .pillar-expand { display: block; }
+
+  .pillar-expand ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pillar-expand li {
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.6;
+  }
+
+  .pillar-expand li::before {
+    content: '→';
+    color: var(--gold);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* BODY LANGUAGE */
+  .body-lang {
+    background: var(--ink);
+    padding: 80px 24px;
+    color: var(--paper);
+  }
+
+  .body-lang .section-title { color: var(--paper); }
+  .body-lang .section-intro { color: rgba(245,240,232,0.6); }
+
+  .body-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .body-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,149,42,0.15);
+    border-radius: 4px;
+    padding: 28px 24px;
+    transition: all 0.2s;
+  }
+
+  .body-card:hover {
+    background: rgba(200,149,42,0.08);
+    border-color: rgba(200,149,42,0.4);
+  }
+
+  .body-icon {
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .body-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+  }
+
+  .body-do, .body-dont {
+    font-size: 13.5px;
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+
+  .body-do strong { color: #7ec8a0; }
+  .body-dont strong { color: #e07070; }
+
+  /* PRACTICE SECTION */
+  .practice {
+    padding: 80px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .drill-card {
+    background: var(--cream);
+    border: 1px solid rgba(13,13,13,0.08);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .drill-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 28px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .drill-header:hover { background: rgba(200,149,42,0.05); }
+
+  .drill-num {
+    width: 36px; height: 36px;
+    background: var(--gold);
+    color: var(--ink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .drill-name {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    flex: 1;
+  }
+
+  .drill-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    padding: 4px 10px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  .tag-daily { background: #e8f4ec; color: var(--sage); }
+  .tag-weekly { background: #fef3e2; color: #a06a10; }
+  .tag-live { background: #fdecea; color: var(--rust); }
+
+  .drill-body {
+    display: none;
+    padding: 0 28px 28px;
+    border-top: 1px solid rgba(13,13,13,0.06);
+  }
+
+  .drill-card.open .drill-body { display: block; }
+
+  .drill-steps {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    counter-reset: step;
+  }
+
+  .drill-step {
+    display: flex;
+    gap: 14px;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: #333;
+  }
+
+  .step-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 500;
+    flex-shrink: 0;
+    min-width: 24px;
+    margin-top: 2px;
+  }
+
+  /* CONFIDENCE SECTION */
+  .confidence {
+    background: linear-gradient(135deg, var(--sage) 0%, #2a3d31 100%);
+    padding: 80px 24px;
+    color: var(--paper);
+  }
+
+  .confidence .section-title { color: var(--paper); }
+  .confidence .section-intro { color: rgba(245,240,232,0.65); }
+
+  .conf-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .conf-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 28px 24px;
+  }
+
+  .conf-q {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--gold-light);
+    margin-bottom: 14px;
+  }
+
+  .conf-a {
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(245,240,232,0.8);
+  }
+
+  /* TRACKER */
+  .tracker {
+    padding: 80px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .tracker-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .tracker-day {
+    aspect-ratio: 1;
+    border-radius: 4px;
+    border: 1.5px solid rgba(13,13,13,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--cream);
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .tracker-day:hover { border-color: var(--gold); }
+  .tracker-day.done { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+  .tracker-day.done .day-check { font-size: 16px; }
+
+  .day-label { font-size: 9px; letter-spacing: 0.1em; opacity: 0.6; }
+  .day-check { font-size: 0; }
+
+  .checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--cream);
+    border: 1px solid rgba(13,13,13,0.08);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    user-select: none;
+  }
+
+  .check-item:hover { border-color: var(--gold); }
+  .check-item.checked { background: #f0f7f3; border-color: #7ec8a0; }
+
+  .check-box {
+    width: 20px; height: 20px;
+    border: 2px solid rgba(13,13,13,0.2);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    font-size: 12px;
+  }
+
+  .check-item.checked .check-box {
+    background: var(--sage);
+    border-color: var(--sage);
+    color: white;
+  }
+
+  /* QUOTE BANNER */
+  .quote-banner {
+    background: var(--gold);
+    padding: 60px 24px;
+    text-align: center;
+  }
+
+  .quote-text {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    font-style: italic;
+    font-weight: 700;
+    color: var(--ink);
+    max-width: 800px;
+    margin: 0 auto 16px;
+    line-height: 1.3;
+  }
+
+  .quote-attr {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(13,13,13,0.5);
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar-wrap {
+    background: var(--ink);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .progress-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: rgba(245,240,232,0.5);
+    white-space: nowrap;
+  }
+
+  .progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .progress-pct {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    animation: fadeUp 0.6s ease both;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .nav { padding: 0 12px; }
+    .nav-btn { padding: 14px 14px; font-size: 12px; }
+    .pillars, .practice, .tracker { padding: 48px 16px; }
+    .body-lang, .confidence { padding: 48px 16px; }
+  }
+
+  /* VOICE TIPS */
+  .voice-section {
+    padding: 80px 24px;
+    background: #faf7f0;
+    max-width: 100%;
+  }
+
+  .voice-inner { max-width: 1100px; margin: 0 auto; }
+
+  .voice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  .voice-card {
+    padding: 28px 22px;
+    border-radius: 4px;
+    border: 1px solid rgba(13,13,13,0.08);
+    background: white;
+  }
+
+  .voice-icon { font-size: 1.8rem; margin-bottom: 14px; display: block; }
+  .voice-name {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .voice-tip { font-size: 13.5px; line-height: 1.65; color: #444; }
+
+  .meter {
+    display: flex;
+    gap: 4px;
+    margin-top: 12px;
+  }
+
+  .meter-block {
+    height: 5px;
+    flex: 1;
+    border-radius: 2px;
+    background: rgba(13,13,13,0.1);
+  }
+
+  .meter-fill { background: var(--gold); }
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-lines"></div>
+  <div class="hero-tag">Your Complete Communication Playbook</div>
+  <h1>Master<br>the <em>Stage</em></h1>
+  <p class="hero-sub">Presentation skills, body language, voice control, and unshakeable confidence — built step by step.</p>
+  <div class="hero-cta">
+    <button class="btn btn-gold" onclick="goTo('pillars')">Start Learning</button>
+    <button class="btn btn-outline" onclick="goTo('tracker')">Track Progress</button>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <button class="nav-btn active" onclick="goTo('pillars')">The 5 Pillars</button>
+  <button class="nav-btn" onclick="goTo('body')">Body Language</button>
+  <button class="nav-btn" onclick="goTo('voice')">Voice & Delivery</button>
+  <button class="nav-btn" onclick="goTo('drills')">Daily Drills</button>
+  <button class="nav-btn" onclick="goTo('confidence')">Confidence</button>
+  <button class="nav-btn" onclick="goTo('tracker')">Tracker</button>
+</nav>
+
+<!-- PROGRESS -->
+<div class="progress-bar-wrap">
+  <span class="progress-label">Today's Progress</span>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+  </div>
+  <span class="progress-pct" id="progressPct">0%</span>
+</div>
+
+<!-- =================== SECTION: PILLARS =================== -->
+<div class="section active" id="sec-pillars">
+  <div class="pillars">
+    <div class="section-label">Foundation</div>
+    <h2 class="section-title">The 5 Pillars of<br>Mastery</h2>
+    <p class="section-intro">Every great communicator is built on these five foundations. Click each to explore what mastery looks like.</p>
+
+    <div class="pillars-grid">
+
+      <div class="pillar-card" onclick="toggleCard(this)">
+        <div class="pillar-num">01 / Pillar</div>
+        <div class="pillar-title">Clarity of Thought</div>
+        <p class="pillar-desc">Before you can explain anything, you must understand it deeply. Confusion on stage starts in the mind, not the mouth.</p>
+        <div class="pillar-expand">
+          <ul>
+            <li>Use the Feynman Technique: explain the concept as if to a 12-year-old. Where you stumble = gaps to fill.</li>
+            <li>Build a "one sentence" version of every idea you present. If you can't, you don't know it well enough.</li>
+            <li>Structure ideas in 3s: Problem → Insight → Solution. Audiences remember threes.</li>
+            <li>Kill jargon unless you define it immediately. Replace "leverage synergies" with "work better together."</li>
+            <li>Prepare the Question You Fear Most — and answer it before they ask.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pillar-card" onclick="toggleCard(this)">
+        <div class="pillar-num">02 / Pillar</div>
+        <div class="pillar-title">Storytelling Structure</div>
+        <p class="pillar-desc">Facts tell, stories sell. Every great explanation is actually a story with tension, stakes, and resolution.</p>
+        <div class="pillar-expand">
+          <ul>
+            <li>Use the STAR framework: Situation → Tension → Action → Result. Works for presentations, meetings, and interviews.</li>
+            <li>Open with a hook — a surprising stat, a bold claim, a vivid scenario. You have 7 seconds to earn their attention.</li>
+            <li>Add stakes: "Here's what happens if we get this wrong." Audiences tune in when they feel it matters.</li>
+            <li>Use analogies relentlessly. "This algorithm works like a postal sorting machine" beats any technical description.</li>
+            <li>End with a call to feel, not just a call to action. What should they go home believing?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pillar-card" onclick="toggleCard(this)">
+        <div class="pillar-num">03 / Pillar</div>
+        <div class="pillar-title">Presence & Command</div>
+        <p class="pillar-desc">Presence is what people feel when you walk in. It's communicated before you say a single word.</p>
+        <div class="pillar-expand">
+          <ul>
+            <li>Take up space deliberately — wide stance, open chest, arms visible. Shrinking signals insecurity.</li>
+            <li>Move with intention. Walk to a spot, plant, then speak. Pacing is nervous energy made visible.</li>
+            <li>Pause before you begin. Stand. Look. Then speak. This single habit transforms how people perceive you.</li>
+            <li>Own silence — use 2-3 second pauses after key points instead of "um" and "uh."</li>
+            <li>Match your energy to the room's need, not your own comfort. Sometimes quiet authority beats enthusiasm.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pillar-card" onclick="toggleCard(this)">
+        <div class="pillar-num">04 / Pillar</div>
+        <div class="pillar-title">Audience Connection</div>
+        <p class="pillar-desc">The best presenter isn't performing at the audience — they're thinking with them.</p>
+        <div class="pillar-expand">
+          <ul>
+            <li>Make eye contact 3-5 seconds per person — long enough to connect, short enough not to stare.</li>
+            <li>Ask questions to create two-way dialogue, even in solo presentations. "Raise your hand if..."</li>
+            <li>Mirror their energy — if the room is flat, don't try to force excitement. Lower first, then build.</li>
+            <li>Use "you" not "people" — "You've probably felt this" lands harder than "Many people feel this."</li>
+            <li>Read the room: Are they leaning in or leaning back? Adjust pacing and depth accordingly.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pillar-card" onclick="toggleCard(this)">
+        <div class="pillar-num">05 / Pillar</div>
+        <div class="pillar-title">Emotional Regulation</div>
+        <p class="pillar-desc">Nerves are not the enemy. Unmanaged nerves are. The goal is to channel anxiety into energy.</p>
+        <div class="pillar-expand">
+          <ul>
+            <li>Reframe: "I'm excited" vs "I'm nervous" — your body's physical state is identical. The label changes performance.</li>
+            <li>Use box breathing: 4 counts in, 4 hold, 4 out, 4 hold. Do this 3x before you speak.</li>
+            <li>Prepare a "reset phrase" — one sentence you say to yourself if you blank or stumble. "Let me come back to that."</li>
+            <li>Embrace mistakes out loud: "That came out wrong, let me try again." Audiences respect honesty.</li>
+            <li>Post-speech: audit, don't spiral. Write 1 thing you did well, 1 thing to improve. Then stop thinking about it.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pillar-card" onclick="toggleCard(this)" style="background: var(--ink); color: var(--paper);">
+        <div class="pillar-num" style="color: var(--gold);">Bonus</div>
+        <div class="pillar-title" style="color: var(--paper);">The 10,000 Rep Rule</div>
+        <p class="pillar-desc" style="color: rgba(245,240,232,0.65);">Mastery isn't about talent. It's about deliberate repetitions with feedback. Here's your weekly rep target.</p>
+        <div class="pillar-expand" style="border-color: rgba(255,255,255,0.1);">
+          <ul>
+            <li style="color: rgba(245,240,232,0.85);">Record yourself speaking for 2 minutes every day. Watch it back without sound first — pure body language review.</li>
+            <li style="color: rgba(245,240,232,0.85);">Join or create a group to present to weekly — Toastmasters, team standups, or even friends over dinner.</li>
+            <li style="color: rgba(245,240,232,0.85);">Teach someone something new each week. Teaching forces clarity like nothing else.</li>
+            <li style="color: rgba(245,240,232,0.85);">Consume: watch TED Talks not for content — but to study technique. Pause, rewind, analyze.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- =================== SECTION: BODY LANGUAGE =================== -->
+<div class="section" id="sec-body">
+  <div class="body-lang">
+    <div style="max-width:1100px; margin: 0 auto;">
+      <div class="section-label" style="color: var(--gold);">Non-Verbal Mastery</div>
+      <h2 class="section-title">Body Language<br>That Commands Respect</h2>
+      <p class="section-intro">55% of your message is body language. Master these zones and your words become 3x more powerful.</p>
+    </div>
+
+    <div class="body-grid">
+
+      <div class="body-card">
+        <span class="body-icon">👁️</span>
+        <div class="body-title">Eye Contact</div>
+        <div class="body-do"><strong>✓ Do:</strong> Hold each person's gaze for a complete thought (3-5 seconds). Scan the whole room. Look at people when you make your key point.</div>
+        <div class="body-dont"><strong>✗ Avoid:</strong> Rapid scanning (makes you look nervous). Staring at slides. Looking up at the ceiling when thinking.</div>
+      </div>
+
+      <div class="body-card">
+        <span class="body-icon">🧍</span>
+        <div class="body-title">Posture & Stance</div>
+        <div class="body-do"><strong>✓ Do:</strong> Feet shoulder-width apart. Chest open. Chin parallel to floor. Weight balanced. Stand still when making a key point.</div>
+        <div class="body-dont"><strong>✗ Avoid:</strong> Crossed arms (defensive). Weight on one foot (casual/dismissive). Hands behind back or in pockets.</div>
+      </div>
+
+      <div class="body-card">
+        <span class="body-icon">🤲</span>
+        <div class="body-title">Hand Gestures</div>
+        <div class="body-do"><strong>✓ Do:</strong> Keep hands at waist level and visible. Use open palms — it signals honesty. Gestures should match your verbal emphasis.</div>
+        <div class="body-dont"><strong>✗ Avoid:</strong> Fidgeting with pen/ring/hair. Pointing fingers at audience. Over-gesturing — it exhausts attention.</div>
+      </div>
+
+      <div class="body-card">
+        <span class="body-icon">😊</span>
+        <div class="body-title">Facial Expression</div>
+        <div class="body-do"><strong>✓ Do:</strong> Smile naturally when appropriate. Let your face show what the content should feel like. Eyebrows up = curiosity and engagement.</div>
+        <div class="body-dont"><strong>✗ Avoid:</strong> Resting "blank" face — audiences mirror your emotion. Forced smiling throughout (inauthentic). Frowning when concentrating.</div>
+      </div>
+
+      <div class="body-card">
+        <span class="body-icon">🚶</span>
+        <div class="body-title">Movement & Space</div>
+        <div class="body-do"><strong>✓ Do:</strong> Move with purpose — walk to a new spot to mark a topic transition. Use the full space. Step forward to signal importance.</div>
+        <div class="body-dont"><strong>✗ Avoid:</strong> Pacing (anxiety signal). Swaying side to side. Hiding behind a podium the whole time.</div>
+      </div>
+
+      <div class="body-card">
+        <span class="body-icon">⏸️</span>
+        <div class="body-title">The Power Pause</div>
+        <div class="body-do"><strong>✓ Do:</strong> Pause 2-3 seconds before your most important sentence. Pause after landing a key idea. Let silence do the work.</div>
+        <div class="body-dont"><strong>✗ Avoid:</strong> Filling silence with "um," "uh," "so," "like." Rushing through transitions. Starting before the room is settled.</div>
+      </div>
+
+      <div class="body-card">
+        <span class="body-icon">🪞</span>
+        <div class="body-title">Mirroring</div>
+        <div class="body-do"><strong>✓ Do:</strong> Subtly match the energy and pace of your audience. Lean in when listening. Nod to build trust and connection.</div>
+        <div class="body-dont"><strong>✗ Avoid:</strong> Mirroring too obviously (it becomes mimicry). Staying rigid when the audience is warm and relaxed.</div>
+      </div>
+
+      <div class="body-card">
+        <span class="body-icon">🔢</span>
+        <div class="body-title">Number Your Points</div>
+        <div class="body-do"><strong>✓ Do:</strong> Use your fingers to count points visually. "There are three things here — first..." This anchors the audience and adds rhythm.</div>
+        <div class="body-dont"><strong>✗ Avoid:</strong> Listing points without gesture — it all blurs together. Using more than 5 fingers (too many points).</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- =================== SECTION: VOICE =================== -->
+<div class="section" id="sec-voice">
+  <div class="voice-section">
+    <div class="voice-inner">
+      <div class="section-label">Vocal Mastery</div>
+      <h2 class="section-title">Voice & Delivery</h2>
+      <p class="section-intro">Your voice is an instrument. These are its controls — learn to play each one deliberately.</p>
+
+      <div class="voice-grid">
+
+        <div class="voice-card">
+          <span class="voice-icon">🔊</span>
+          <div class="voice-name">Volume</div>
+          <div class="voice-tip">Project from your diaphragm, not your throat. Speak to the back row, always. Drop volume for intimacy; raise it for urgency.</div>
+          <div class="meter">
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block"></div>
+          </div>
+          <div style="font-size:11px; color:#888; margin-top:6px; font-family: var(--mono);">Target level: 4/5</div>
+        </div>
+
+        <div class="voice-card">
+          <span class="voice-icon">🎵</span>
+          <div class="voice-name">Tone & Pitch</div>
+          <div class="voice-tip">Vary your pitch to create rhythm. Monotone = instant sleep. Drop pitch at the end of statements; raise it only for questions.</div>
+          <div class="meter">
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+          </div>
+          <div style="font-size:11px; color:#888; margin-top:6px; font-family: var(--mono);">Variance: high impact</div>
+        </div>
+
+        <div class="voice-card">
+          <span class="voice-icon">⏱️</span>
+          <div class="voice-name">Pace & Rhythm</div>
+          <div class="voice-tip">150-170 words per minute is conversational. Slow down at complex or emotional points. Speed up to build momentum. Change pace = change energy.</div>
+          <div class="meter">
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block"></div>
+            <div class="meter-block"></div>
+          </div>
+          <div style="font-size:11px; color:#888; margin-top:6px; font-family: var(--mono);">Sweet spot: 150-170 wpm</div>
+        </div>
+
+        <div class="voice-card">
+          <span class="voice-icon">✂️</span>
+          <div class="voice-name">Emphasis & Stress</div>
+          <div class="voice-tip">Stress the right word in a sentence. "I didn't say she stole the money" — each word stressed changes the meaning entirely. Choose consciously.</div>
+          <div class="meter">
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block"></div>
+          </div>
+          <div style="font-size:11px; color:#888; margin-top:6px; font-family: var(--mono);">Practice: stress drills</div>
+        </div>
+
+        <div class="voice-card">
+          <span class="voice-icon">🧘</span>
+          <div class="voice-name">Breath Control</div>
+          <div class="voice-tip">Breathe from the belly. Inhale before you start a sentence, not in the middle. A shaky voice = shallow breathing. Fix the breath, fix the voice.</div>
+          <div class="meter">
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+          </div>
+          <div style="font-size:11px; color:#888; margin-top:6px; font-family: var(--mono);">Foundation skill: master first</div>
+        </div>
+
+        <div class="voice-card">
+          <span class="voice-icon">💬</span>
+          <div class="voice-name">Articulation</div>
+          <div class="voice-tip">Open your mouth more than you think you need to. Practice tongue twisters. "Red lorry, yellow lorry." Crisp consonants and full vowels = gravitas.</div>
+          <div class="meter">
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block meter-fill"></div>
+            <div class="meter-block"></div>
+            <div class="meter-block"></div>
+          </div>
+          <div style="font-size:11px; color:#888; margin-top:6px; font-family: var(--mono);">Daily warmup: 5 min</div>
+        </div>
+
+      </div>
+
+      <div style="margin-top: 48px; padding: 32px; background: white; border-radius: 4px; border: 1px solid rgba(13,13,13,0.08);">
+        <div class="section-label">Quick Exercise</div>
+        <h3 style="font-family: var(--serif); font-size: 1.4rem; margin-bottom: 12px;">The 2-Minute Voice Warmup</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 20px;">
+          <div style="padding: 16px; background: #faf7f2; border-radius: 3px; border-left: 3px solid var(--gold);">
+            <div style="font-family: var(--mono); font-size: 11px; color: var(--gold); margin-bottom: 6px;">STEP 01 — 30s</div>
+            <div style="font-size: 14px; line-height: 1.6;">Hum with your mouth closed. Feel the vibration in your chest, not your nose.</div>
+          </div>
+          <div style="padding: 16px; background: #faf7f2; border-radius: 3px; border-left: 3px solid var(--gold);">
+            <div style="font-family: var(--mono); font-size: 11px; color: var(--gold); margin-bottom: 6px;">STEP 02 — 30s</div>
+            <div style="font-size: 14px; line-height: 1.6;">Say "ma-me-mi-mo-mu" slowly, over-exaggerating lip and jaw movement.</div>
+          </div>
+          <div style="padding: 16px; background: #faf7f2; border-radius: 3px; border-left: 3px solid var(--gold);">
+            <div style="font-family: var(--mono); font-size: 11px; color: var(--gold); margin-bottom: 6px;">STEP 03 — 30s</div>
+            <div style="font-size: 14px; line-height: 1.6;">Count 1-10, getting louder each number. Breathe from your belly on each count.</div>
+          </div>
+          <div style="padding: 16px; background: #faf7f2; border-radius: 3px; border-left: 3px solid var(--gold);">
+            <div style="font-family: var(--mono); font-size: 11px; color: var(--gold); margin-bottom: 6px;">STEP 04 — 30s</div>
+            <div style="font-size: 14px; line-height: 1.6;">Read any sentence aloud — first in a whisper, then normal, then as if addressing 500 people.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== SECTION: DRILLS =================== -->
+<div class="section" id="sec-drills">
+  <div class="practice">
+    <div class="section-label">Deliberate Practice</div>
+    <h2 class="section-title">Daily Drills for<br>Rapid Mastery</h2>
+    <p class="section-intro">Consistency beats intensity. These drills — done regularly — will transform your communication in 90 days.</p>
+
+    <div class="drill-card" onclick="toggleDrill(this)">
+      <div class="drill-header">
+        <div class="drill-num">1</div>
+        <div class="drill-name">The Mirror Drill</div>
+        <span class="drill-tag tag-daily">Daily · 5 min</span>
+      </div>
+      <div class="drill-body">
+        <p style="font-size: 14.5px; color: #444; line-height: 1.7;">Stand in front of a mirror and present for 2 minutes on any topic. Watch your face, gestures, and posture. The goal isn't perfection — it's awareness.</p>
+        <div class="drill-steps">
+          <div class="drill-step"><div class="step-num">01.</div><div>Choose a topic: "What I did today," "Explain your job," or "My favorite film."</div></div>
+          <div class="drill-step"><div class="step-num">02.</div><div>Set a 2-minute timer. Speak continuously — no stopping.</div></div>
+          <div class="drill-step"><div class="step-num">03.</div><div>Observe: Are your hands visible? Is your posture open? Are you making eye contact with yourself?</div></div>
+          <div class="drill-step"><div class="step-num">04.</div><div>Write one observation about your body language. Work on just that one thing tomorrow.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="drill-card" onclick="toggleDrill(this)">
+      <div class="drill-header">
+        <div class="drill-num">2</div>
+        <div class="drill-name">Record & Review</div>
+        <span class="drill-tag tag-daily">Daily · 10 min</span>
+      </div>
+      <div class="drill-body">
+        <p style="font-size: 14.5px; color: #444; line-height: 1.7;">Record a 2-minute video of yourself explaining anything. Watch it twice — once with sound, once without. This is the fastest feedback loop available.</p>
+        <div class="drill-steps">
+          <div class="drill-step"><div class="step-num">01.</div><div>Record 2 minutes on your phone. Topic: explain how something works.</div></div>
+          <div class="drill-step"><div class="step-num">02.</div><div>Watch with sound: note filler words ("um," "like," "so," "you know"). Count them.</div></div>
+          <div class="drill-step"><div class="step-num">03.</div><div>Watch without sound: notice posture, gestures, facial expression, energy.</div></div>
+          <div class="drill-step"><div class="step-num">04.</div><div>Pick ONE thing to fix. Record again. Compare. Ship the improvement.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="drill-card" onclick="toggleDrill(this)">
+      <div class="drill-header">
+        <div class="drill-num">3</div>
+        <div class="drill-name">The Feynman Explanation</div>
+        <span class="drill-tag tag-daily">Daily · 5 min</span>
+      </div>
+      <div class="drill-body">
+        <p style="font-size: 14.5px; color: #444; line-height: 1.7;">Pick something complex from your field. Explain it as if speaking to a curious 12-year-old. This forces simplicity and reveals gaps in your own understanding.</p>
+        <div class="drill-steps">
+          <div class="drill-step"><div class="step-num">01.</div><div>Choose a complex concept from your work, studies, or news.</div></div>
+          <div class="drill-step"><div class="step-num">02.</div><div>Explain it out loud for 60 seconds using no jargon whatsoever.</div></div>
+          <div class="drill-step"><div class="step-num">03.</div><div>Where you struggled = what you don't fully understand. Go learn that part.</div></div>
+          <div class="drill-step"><div class="step-num">04.</div><div>Try again. Each iteration, your clarity compounds.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="drill-card" onclick="toggleDrill(this)">
+      <div class="drill-header">
+        <div class="drill-num">4</div>
+        <div class="drill-name">Impromptu Speaking</div>
+        <span class="drill-tag tag-daily">Daily · 5 min</span>
+      </div>
+      <div class="drill-body">
+        <p style="font-size: 14.5px; color: #444; line-height: 1.7;">Pull a random object, word, or topic. Speak about it for 60 seconds using a clear structure. This trains your brain to think and speak simultaneously.</p>
+        <div class="drill-steps">
+          <div class="drill-step"><div class="step-num">01.</div><div>Pick a random word from a dictionary or whatever is in front of you.</div></div>
+          <div class="drill-step"><div class="step-num">02.</div><div>Use PREP: Point → Reason → Example → Point. Speak for exactly 60 seconds.</div></div>
+          <div class="drill-step"><div class="step-num">03.</div><div>Record it. Did you have a clear opening and ending? Or did you just trail off?</div></div>
+          <div class="drill-step"><div class="step-num">04.</div><div>Advance: do this with a friend who gives a new topic every day.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="drill-card" onclick="toggleDrill(this)">
+      <div class="drill-header">
+        <div class="drill-num">5</div>
+        <div class="drill-name">TED Talk Deconstruction</div>
+        <span class="drill-tag tag-weekly">Weekly · 20 min</span>
+      </div>
+      <div class="drill-body">
+        <p style="font-size: 14.5px; color: #444; line-height: 1.7;">Watch a great TED Talk — but study the technique, not the content. Pause and rewind. Treat it like a masterclass in human communication.</p>
+        <div class="drill-steps">
+          <div class="drill-step"><div class="step-num">01.</div><div>Choose a highly-rated TED Talk. Recommended: Brené Brown, Simon Sinek, Hans Rosling.</div></div>
+          <div class="drill-step"><div class="step-num">02.</div><div>Note: How do they open? What's the hook? How do they use their body?</div></div>
+          <div class="drill-step"><div class="step-num">03.</div><div>Pause at every strong moment: What made it land? Pace? Pause? Story? Gesture?</div></div>
+          <div class="drill-step"><div class="step-num">04.</div><div>Borrow one technique and practice it this week in your own presentations.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="drill-card" onclick="toggleDrill(this)">
+      <div class="drill-header">
+        <div class="drill-num">6</div>
+        <div class="drill-name">The Teaching Test</div>
+        <span class="drill-tag tag-weekly">Weekly · 15 min</span>
+      </div>
+      <div class="drill-body">
+        <p style="font-size: 14.5px; color: #444; line-height: 1.7;">Find someone — friend, family, colleague — and teach them one new thing this week. Real listeners give you real feedback. No audience is more valuable than a live one.</p>
+        <div class="drill-steps">
+          <div class="drill-step"><div class="step-num">01.</div><div>Choose something you know well or just learned. Prep for 5 minutes max.</div></div>
+          <div class="drill-step"><div class="step-num">02.</div><div>Teach it in 5 minutes. No slides. Just you, speaking clearly.</div></div>
+          <div class="drill-step"><div class="step-num">03.</div><div>Ask: "What was unclear? What did I repeat too much? What was most interesting?"</div></div>
+          <div class="drill-step"><div class="step-num">04.</div><div>Their feedback is gold. Write it down. Adjust next week.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="drill-card" onclick="toggleDrill(this)">
+      <div class="drill-header">
+        <div class="drill-num">7</div>
+        <div class="drill-name">High Stakes Practice</div>
+        <span class="drill-tag tag-live">Live · Monthly</span>
+      </div>
+      <div class="drill-body">
+        <p style="font-size: 14.5px; color: #444; line-height: 1.7;">Deliberately put yourself in uncomfortable speaking situations monthly. Comfort is the enemy of growth. Controlled exposure builds confidence that drills alone can't.</p>
+        <div class="drill-steps">
+          <div class="drill-step"><div class="step-num">01.</div><div>Volunteer to present in a team meeting — even for 2 minutes.</div></div>
+          <div class="drill-step"><div class="step-num">02.</div><div>Attend a Toastmasters session or open-mic event as a speaker.</div></div>
+          <div class="drill-step"><div class="step-num">03.</div><div>Pitch an idea to someone who can say no. The stakes sharpen your delivery.</div></div>
+          <div class="drill-step"><div class="step-num">04.</div><div>Debrief: Rate your performance 1-10 on content, delivery, and confidence. Set one target for next time.</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =================== SECTION: CONFIDENCE =================== -->
+<div class="section" id="sec-confidence">
+  <div class="confidence">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <div class="section-label" style="color: var(--gold-light);">Inner Game</div>
+      <h2 class="section-title">Building Unshakeable<br>Confidence</h2>
+      <p class="section-intro">Confidence isn't a trait you have. It's a skill you build — through reps, mindset shifts, and honest self-study.</p>
+
+      <div class="conf-grid">
+
+        <div class="conf-card">
+          <div class="conf-q">"What if I blank out completely?"</div>
+          <div class="conf-a">Have a reset phrase ready: "Let me take a breath and come back to that." Then do exactly that. The audience won't judge the pause — they'll respect the composure. Blanking happens to every speaker. Recovery is the skill.</div>
+        </div>
+
+        <div class="conf-card">
+          <div class="conf-q">"What if they think I'm boring?"</div>
+          <div class="conf-a">Boredom comes from a flat delivery, not from you as a person. Fix the delivery: vary your pace, tell a story, ask a question. Also — most audiences are rooting for you. They want to be engaged. Meet them halfway.</div>
+        </div>
+
+        <div class="conf-card">
+          <div class="conf-q">"I get so nervous before speaking."</div>
+          <div class="conf-a">Nervousness is excitement mislabeled. Say "I'm excited" instead of "I'm nervous" — it genuinely changes your state. Also: box breathe. Move your body before you speak. Physical movement burns off cortisol in under 90 seconds.</div>
+        </div>
+
+        <div class="conf-card">
+          <div class="conf-q">"What if they ask something I don't know?"</div>
+          <div class="conf-a">"That's a great question — I don't have the answer right now, but I'll find out and get back to you." This line builds MORE credibility than bluffing. Audiences trust people who know their limits. Prepare it in advance.</div>
+        </div>
+
+        <div class="conf-card">
+          <div class="conf-q">"I don't think I'm a natural speaker."</div>
+          <div class="conf-a">No one is. Barack Obama was famously nervous early in his career. Demosthenes (the greatest orator of ancient Greece) reportedly practiced with pebbles in his mouth to overcome a stutter. The difference between you now and then is only deliberate practice.</div>
+        </div>
+
+        <div class="conf-card">
+          <div class="conf-q">"How do I project authority without faking it?"</div>
+          <div class="conf-a">Authority comes from preparation. When you know your material deeply, your body naturally relaxes — and that reads as authority. Also: slow down. Fast = anxious. Measured pace = command. The body language follows the mindset, and the mindset follows the prep.</div>
+        </div>
+
+      </div>
+
+      <div style="margin-top: 48px; padding: 36px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;">
+        <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--gold-light); margin-bottom: 16px;">DAILY CONFIDENCE RITUAL</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+          <div style="font-size: 14px; line-height: 1.7; color: rgba(245,240,232,0.8);"><strong style="color: var(--gold-light);">Morning (2 min):</strong><br>Stand in a power pose. Say your "anchor phrase" — one sentence that reminds you of who you are at your best.</div>
+          <div style="font-size: 14px; line-height: 1.7; color: rgba(245,240,232,0.8);"><strong style="color: var(--gold-light);">Pre-talk (1 min):</strong><br>Box breathe x3. Shake your hands out. Say: "I have something valuable to share. They want to hear it."</div>
+          <div style="font-size: 14px; line-height: 1.7; color: rgba(245,240,232,0.8);"><strong style="color: var(--gold-light);">Post-talk (3 min):</strong><br>Write 1 thing you did well. 1 thing to improve. Then close the notebook. No spiraling. Growth, not punishment.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== SECTION: TRACKER =================== -->
+<div class="section" id="sec-tracker">
+  <div class="tracker">
+    <div class="section-label">Your Journey</div>
+    <h2 class="section-title">30-Day Practice<br>Tracker</h2>
+    <p class="section-intro">Click each day to mark it complete. Streaks build habits. Habits build mastery.</p>
+
+    <div class="tracker-grid" id="dayTracker"></div>
+
+    <h3 style="font-family: var(--serif); font-size: 1.4rem; margin-bottom: 20px;">Today's Practice Checklist</h3>
+    <div class="checklist" id="checklist">
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <span>Mirror drill (5 min)</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <span>Voice warmup (2 min)</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <span>Record & review video</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <span>Feynman explanation</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <span>Impromptu speaking drill</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <span>Read one communication tip</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <span>Post-practice journal entry</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <span>Confidence ritual (morning)</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px; padding: 28px; background: var(--cream); border-radius: 4px; border: 1px solid rgba(13,13,13,0.08);">
+      <div class="section-label">90-Day Milestones</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 16px;">
+        <div>
+          <div style="font-family: var(--mono); font-size: 24px; font-weight: 500; color: var(--gold);">Day 1–30</div>
+          <div style="font-size: 14px; color: #444; line-height: 1.65; margin-top: 8px;"><strong>Awareness.</strong> You begin noticing your habits — filler words, posture, pacing. This discomfort is progress.</div>
+        </div>
+        <div>
+          <div style="font-family: var(--mono); font-size: 24px; font-weight: 500; color: var(--gold);">Day 31–60</div>
+          <div style="font-size: 14px; color: #444; line-height: 1.65; margin-top: 8px;"><strong>Adjustment.</strong> New habits start forming. Others begin to notice a change in your presence before you do.</div>
+        </div>
+        <div>
+          <div style="font-family: var(--mono); font-size: 24px; font-weight: 500; color: var(--gold);">Day 61–90</div>
+          <div style="font-size: 14px; color: #444; line-height: 1.65; margin-top: 8px;"><strong>Automaticity.</strong> Good delivery stops being a choice and becomes default. Your baseline has shifted permanently.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE BANNER -->
+<div class="quote-banner">
+  <div class="quote-text">"The human brain starts working the moment you are born and never stops until you stand up to speak in public."</div>
+  <div class="quote-attr">— George Jessel (paraphrased)</div>
+</div>
+
+<script>
+  // Navigation
+  function goTo(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('sec-' + id).classList.add('active');
+    const idx = ['pillars','body','voice','drills','confidence','tracker'].indexOf(id);
+    document.querySelectorAll('.nav-btn')[idx].classList.add('active');
+    window.scrollTo({ top: document.getElementById('mainNav').offsetTop - 10, behavior: 'smooth' });
+  }
+
+  // Toggle pillar cards
+  function toggleCard(card) {
+    card.classList.toggle('open');
+  }
+
+  // Toggle drill cards
+  function toggleDrill(card) {
+    card.classList.toggle('open');
+  }
+
+  // Build tracker
+  const days = ['M','T','W','T','F','S','S'];
+  const grid = document.getElementById('dayTracker');
+  const trackerState = JSON.parse(localStorage.getItem('trackerDays') || '{}');
+
+  for (let i = 1; i <= 30; i++) {
+    const div = document.createElement('div');
+    div.className = 'tracker-day' + (trackerState[i] ? ' done' : '');
+    div.innerHTML = `<span class="day-label">D${i}</span><span class="day-check">${trackerState[i] ? '✓' : ''}</span>`;
+    div.onclick = () => {
+      div.classList.toggle('done');
+      const isDone = div.classList.contains('done');
+      trackerState[i] = isDone;
+      div.querySelector('.day-check').textContent = isDone ? '✓' : '';
+      try { localStorage.setItem('trackerDays', JSON.stringify(trackerState)); } catch(e) {}
+    };
+    grid.appendChild(div);
+  }
+
+  // Checklist + progress
+  const checkState = JSON.parse(localStorage.getItem('checkState') || '{}');
+
+  function updateProgress() {
+    const items = document.querySelectorAll('.check-item');
+    const checked = document.querySelectorAll('.check-item.checked').length;
+    const pct = Math.round((checked / items.length) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+  }
+
+  function toggleCheck(item) {
+    item.classList.toggle('checked');
+    const key = item.querySelector('span').textContent;
+    checkState[key] = item.classList.contains('checked');
+    try { localStorage.setItem('checkState', JSON.stringify(checkState)); } catch(e) {}
+    updateProgress();
+  }
+
+  // Restore checklist
+  document.querySelectorAll('.check-item').forEach(item => {
+    const key = item.querySelector('span').textContent;
+    if (checkState[key]) item.classList.add('checked');
+  });
+
+  updateProgress();
+</script>
+
+</body>
+</html>
